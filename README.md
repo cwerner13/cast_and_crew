@@ -14,6 +14,8 @@ The dashboard supports four interactive views:
 - Compare films in the selected programme using IMDb Rating and IMDb Votes. 
 - Compare its contributors based on the average IMDb rating and total IMDb votes of their previous work.
 
+ URL: https://public.tableau.com/app/profile/claudia.werner/viz/Festivalguide/FestivalBubble
+
 ### 3. Career Timeline Individual Contributor
 Explore an individual contributor's complete filmography and career progression over time.
 
@@ -23,11 +25,69 @@ View and compare the historical filmographies of the entire creative team behind
 And this will produce a flow chart:
 
 ```mermaid
-graph LR
-A[Square Rect] -- Link text --> B((Circle))
-A --> C(Round Rect)
-B --> D{Rhombus}
-C --> D
+flowchart LR
+  subgraph "IMDb raw sources"
+    A1["title.basics.tsv.gz"]
+    A2["name.basics.tsv.gz"]
+    A3["title.ratings.tsv.gz"]
+    A4["title.principals.tsv.gz"]
+    A5["title.crew.tsv.gz"]
+  end
+
+  subgraph "Festival CSV archive"
+    B1["festival CSV files"]
+  end
+
+subgraph "Festival CSV archive"
+        U1["ratings.csv"]
+  end
+  subgraph "dwh_titles__details.ipynb"
+    D1["dwh_titles__details.csv"]
+    D2["dwh_principals__details.csv"]
+    D3["dwh_titles__ratings.csv"]
+  end
+
+  subgraph "dwh_xref_titles_principals__filtered.ipynb"
+    D4["dwh_xref_titles_principals__filtered.csv"]
+  end
+
+  subgraph "dwh_titles__list_grouping.ipynb"
+    D5["fst_union.csv"]
+    D6["dwh_editor_lists__pivoted.csv"]
+  end
+
+  subgraph "mrt_xref_title_principals__enriched.ipynb"
+    D7["imdb.csv"]
+
+  end
+
+  subgraph "mrt_xref_title_principals__rating_profiles.ipynb"
+    D8["Xfst"]
+    D9["rating_duplicate.csv"]
+    D10["mrt_principals__aggregated.csv"]
+    D11["nconst_duplicate.csv"]
+  end
+
+  A1 --> D1
+  A2 --> D2
+  A3 --> D3
+  A4 --> D4
+  A5 --> D4
+
+  B1 --> D5
+
+  D1 --> D7
+  D2 --> D7
+  D3 --> D7
+  D4 --> D7
+  U1 --> D7
+
+  D7 --> D8
+  D5 --> D8
+
+  D8 --> D9
+  D7 --> D10
+  D7 --> D11
 ```
 
 Loved that movie? Wonder whether cast & crew has teamed up before? 
