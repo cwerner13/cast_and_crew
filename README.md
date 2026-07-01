@@ -51,23 +51,27 @@ subgraph "Festival CSV archive"
     D4["dwh_xref_titles_principals__filtered.csv"]
   end
 
-  subgraph "dwh_titles__list_grouping.ipynb"
-    D5["fst_union.csv"]
+  subgraph "dwh_titles__editor_lists.ipynb"
+    D5["dwh_titles__editor_lists.csv"]
     D6["dwh_editor_lists__pivoted.csv"]
   end
 
+ subgraph "mrt_titles__editor_lists.ipynb"
+    D12["mrt_titles__editor_lists.csv"]
+  end
+
   subgraph "mrt_xref_title_principals__enriched.ipynb"
-    D7["imdb.csv"]
+    D7["mrt_xref_titles_principals__enriched.csv"]
 
   end
 
   subgraph "mrt_xref_title_principals__rating_profiles.ipynb"
-    D8["Xfst"]
-    D9["rating_duplicate.csv"]
-    D10["mrt_principals__aggregated.csv"]
-    D11["nconst_duplicate.csv"]
-  end
-
+      D8["Xfst"]
+         D10["mrt_principals__aggregated.csv"]
+         D9["mrt_titles__per_rating_category.csv"]
+         D11["mrt_principals__per_rating_category.csv"]
+    end
+  
   A1 --> D1
   A2 --> D2
   A3 --> D3
@@ -86,8 +90,23 @@ subgraph "Festival CSV archive"
   D5 --> D8
 
   D8 --> D9
-  D7 --> D10
-  D7 --> D11
+  D8 --> D10
+  D8 --> D11
+
+  D5 --> D12
+
+  D7  --> Tableau_loved_movie
+  D7  --> Tableau_underrated
+  D12 --> Tableau_underrated
+
+  D9  --> Tableau_festival_guide
+  D11  --> Tableau_festival_guide
+
+  subgraph "xto, has to be same folder"
+     Tableau_festival_guide
+     Tableau_loved_movie
+     Tableau_underrated
+    end
 ```
 
 Loved that movie? Wonder whether cast & crew has teamed up before? 
