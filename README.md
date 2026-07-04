@@ -26,65 +26,95 @@ And this will produce a flow chart:
 
 ```mermaid
 flowchart LR
-  subgraph "IMDb raw sources"
-    A1["title.basics.tsv.gz"]
-    A2["name.basics.tsv.gz"]
-    A3["title.ratings.tsv.gz"]
-    A4["title.principals.tsv.gz"]
-    A5["title.crew.tsv.gz"]
-  end
 
-  subgraph "Festival CSV archive"
-    B1["festival CSV files"]
-  end
+subgraph "sources"
+    subgraph "...\rpi\ENV\interfaces\rpi10008_imdb__editor_lists
+              \import\archive"
+              rpi10008_sg1["www.imdb.com/user/.../lists"]
+    end
+    
+    subgraph "...\rpi\ENV\interfaces\rpi10009_imdb__user_ratings
+               \import\archive"
+              rpi10009_sg1["www.imdb.com/user/.../ratings"]
+    end
 
-subgraph "Festival CSV archive"
-        U1["ratings.csv"]
-  end
+    subgraph "IMDb raw sources"
+          
+             A2["name.basics.tsv.gz"]
+             A1["title.basics.tsv.gz"]
+             A3["title.ratings.tsv.gz"]
+             A4["title.principals.tsv.gz"]
+             A5["title.crew.tsv.gz"]
+    end
+ end
+
+  %%% dwh
+  subgraph "dwh"
   subgraph "dwh_titles__details.ipynb"
     D1["dwh_titles__details.csv"]
-    D2["dwh_principals__details.csv"]
     D3["dwh_titles__ratings.csv"]
   end
+
+    subgraph "dwh_principals__details.ipynb"
+    D2["dwh_principals__details.csv"]
+  end
+
 
   subgraph "dwh_xref_titles_principals__filtered.ipynb"
     D4["dwh_xref_titles_principals__filtered.csv"]
   end
 
+
+
+  subgraph "dwh_titles__user_profile_ratings.ipynb"
+    rpi10009_sg3["ratings.csv"]
+  end
   subgraph "dwh_titles__editor_lists.ipynb"
     D5["dwh_titles__editor_lists.csv"]
     D6["dwh_editor_lists__pivoted.csv"]
   end
+end
+ 
+  %%% mart
+  subgraph "mrt/xto   ...\rpi\ENV\interfaces\rpi20003_twb__cast_and_crew\export\current"
 
- subgraph "mrt_titles__editor_lists.ipynb"
-    D12["mrt_titles__editor_lists.csv"]
-  end
-
-  subgraph "mrt_xref_title_principals__enriched.ipynb"
-    D7["mrt_xref_titles_principals__enriched.csv"]
-
-  end
-
-  subgraph "mrt_xref_title_principals__rating_profiles.ipynb"
-      D8["Xfst"]
-         D10["mrt_principals__aggregated.csv"]
-         D9["mrt_titles__per_rating_category.csv"]
-         D11["mrt_principals__per_rating_category.csv"]
+    subgraph "mrt_titles__editor_lists.ipynb"
+              D12["mrt_titles__editor_lists.csv"]
     end
+
+    subgraph "mrt_xref_title_principals__enriched.ipynb"
+              D7["mrt_xref_titles_principals__enriched.csv"]
+    end
+
+    subgraph "mrt_xref_title_principals__rating_profiles.ipynb"
+             D8["Xfst"]
+             D10["mrt_principals__aggregated.csv"]
+             D9["mrt_titles__per_rating_category.csv"]
+            D11["mrt_principals__per_rating_category.csv"]
+    end
+  end 
+ 
+
   
+
+  %%% connections
   A1 --> D1
   A2 --> D2
   A3 --> D3
   A4 --> D4
   A5 --> D4
 
-  B1 --> D5
+   
+ 
+  rpi10008_sg1   --> D5
+  rpi10009_sg1   --> rpi10009_sg3 --> D7
+
+
 
   D1 --> D7
   D2 --> D7
   D3 --> D7
   D4 --> D7
-  U1 --> D7
 
   D7 --> D8
   D5 --> D8
@@ -95,10 +125,10 @@ subgraph "Festival CSV archive"
 
   D5 --> D12
 
-  D7  --> Tableau_loved_movie
+ 
   D7  --> Tableau_underrated
   D12 --> Tableau_underrated
-
+ D7  --> Tableau_loved_movie
   D9  --> Tableau_festival_guide
   D11  --> Tableau_festival_guide
 
