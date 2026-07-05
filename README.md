@@ -25,9 +25,14 @@ View and compare the historical filmographies of the entire creative team behind
 And this will produce a flow chart:
 
 ```mermaid
-flowchart LR
+ flowchart LR
 
-subgraph "sources"
+classDef default fill:#ffffff,stroke:#000000,color:#000000;
+classDef dashed fill:none,stroke:#000000,stroke-width:1px,stroke-dasharray: 5 5;
+style sg fill:#ffffff,stroke:#000000
+
+
+subgraph "sources" 
     subgraph "...\rpi\ENV\interfaces\rpi10008_imdb__editor_lists
               \import\archive"
               rpi10008_sg1["www.imdb.com/user/.../lists"]
@@ -86,8 +91,11 @@ end
               D7["mrt_xref_titles_principals__enriched.csv"]
     end
 
+
+    
+
     subgraph "mrt_xref_title_principals__rating_profiles.ipynb"
-             D8["Xfst"]
+             D8["Xfst"]:::dashed
              D10["mrt_principals__aggregated.csv"]
              D9["mrt_titles__per_rating_category.csv"]
             D11["mrt_principals__per_rating_category.csv"]
@@ -126,16 +134,17 @@ end
   D5 --> D12
 
  
-  D7  --> Tableau_underrated
-  D12 --> Tableau_underrated
- D7  --> Tableau_loved_movie
-  D9  --> Tableau_festival_guide
-  D11  --> Tableau_festival_guide
+  D7  --> Most_Underrated_Movies
+  D12 --> Most_Underrated_Movies
+ D7  --> Cast_and_Crew_Filmography
+  D9  --> Festivalguide
+  D11  --> Festivalguide
 
-  subgraph "xto, has to be same folder"
-     Tableau_festival_guide
-     Tableau_loved_movie
-     Tableau_underrated
+ 
+  subgraph "Tableau Dashboards" 
+     Festivalguide
+     Cast_and_Crew_Filmography
+     Most_Underrated_Movies
     end
 ```
 
