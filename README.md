@@ -8,38 +8,53 @@ These sources provide limited insight into the people behind a film and their pr
 ## Solution
 This project extends a screening programme with historical IMDb data to provide additional context for decision-making. Instead of evaluating only the films currently showing, users can explore the track record of the directors, writers, actors, producers, composers, cinematographers, editors, and other contributors behind each film.
 
-The dashboard supports four interactive views:
+Tableau dashboards are linked for interactive views:
 
 ### 1. Screening Programme Overview
 - Compare films in the selected programme using IMDb Rating and IMDb Votes. 
 - Compare its contributors based on the average IMDb rating and total IMDb votes of their previous work.
 
- URL: https://public.tableau.com/app/profile/claudia.werner/viz/Festivalguide/FestivalBubble
+with option to select film's imdb website or  Cast & Crew Filmography 
+URL: https://public.tableau.com/app/profile/claudia.werner/viz/Festivalguide/FestivalBubble
 
-### 3. Career Timeline Individual Contributor
-Explore an individual contributor's complete filmography and career progression over time.
+  ### a. Individual Film: Cast & Crew Explorer
+  View and compare the historical filmographies of the entire creative team behind a selected film.
+  URL: https://public.tableau.com/app/profile/claudia.werner/viz/LovedthatMovieCastCrewFilmography/CastCrew?Tconst_sel_p=tt10370710
 
-### 4. Cast & Crew Explorer
-View and compare the historical filmographies of the entire creative team behind a selected film.
+  ### b. Individual Contributor: Carrer Timeline
+  Explore an individual contributor's complete filmography and career progression over time.
+  URL: https://public.tableau.com/app/profile/claudia.werner/viz/LovedthatMovieCastCrewFilmography/CastCrew?Tconst_sel_p=tt10370710
+
+### 2. Most Underrated Movies
+
+  ### Individual User Rating vs IMDb rating
+  ranked by rating discrepancy
+  URL: in progress
 
 And this will produce a flow chart:
-
 ```mermaid
  flowchart LR
 
 classDef default fill:#ffffff,stroke:#000000,color:#000000;
 classDef dashed fill:none,stroke:#000000,stroke-width:1px,stroke-dasharray: 5 5;
-style sg fill:#ffffff,stroke:#000000
+ 
+%%{init: {
+  "theme": "base",
+  "themeVariables": {
+    "clusterBkg": "#c4c0c033",
+    "clusterBorder": "grey",
+    "primaryColor": "#ffffff",
+    "primaryBorderColor": "#000000",
+    "primaryTextColor": "#000000"
+  }
+}}%%
 
-
-subgraph "sources" 
-    subgraph "...\rpi\ENV\interfaces\rpi10008_imdb__editor_lists
-              \import\archive"
+subgraph "sources: ...\rpi\ENV\interfaces\"
+    subgraph "rpi10008_imdb__editor_lists\import\archive"
               rpi10008_sg1["www.imdb.com/user/.../lists"]
     end
     
-    subgraph "...\rpi\ENV\interfaces\rpi10009_imdb__user_ratings
-               \import\archive"
+    subgraph "rpi10009_imdb__user_ratings\import\archive"
               rpi10009_sg1["www.imdb.com/user/.../ratings"]
     end
 
@@ -54,7 +69,7 @@ subgraph "sources"
  end
 
   %%% dwh
-  subgraph "dwh"
+  subgraph "dwh ...\rpi\ENV\transformations\"
   subgraph "dwh_titles__details.ipynb"
     D1["dwh_titles__details.csv"]
     D3["dwh_titles__ratings.csv"]
@@ -136,12 +151,12 @@ end
  
   D7  --> Most_Underrated_Movies
   D12 --> Most_Underrated_Movies
- D7  --> Cast_and_Crew_Filmography
+  D7  --> Cast_and_Crew_Filmography
   D9  --> Festivalguide
   D11  --> Festivalguide
 
  
-  subgraph "Tableau Dashboards" 
+  subgraph "https://public.tableau.com/" 
      Festivalguide
      Cast_and_Crew_Filmography
      Most_Underrated_Movies
