@@ -10,26 +10,26 @@ This project extends a screening programme with historical IMDb data to provide 
 
 Tableau dashboards are linked for interactive views:
 
-### 1. Screening Programme Overview
+### 1. Festival Guide / Screening Programme Overview
 - Compare films in the selected programme using IMDb Rating and IMDb Votes. 
 - Compare its contributors based on the average IMDb rating and total IMDb votes of their previous work.
 
-with option to select film's imdb website or  Cast & Crew Filmography 
+with option to select film's imdb website or  Cast & Crew Filmography<br> 
 URL: https://public.tableau.com/app/profile/claudia.werner/viz/Festivalguide/FestivalBubble
 
-  ### a. Individual Film: Cast & Crew Explorer
-  View and compare the historical filmographies of the entire creative team behind a selected film.
+### 2. Cast & Crew Filmography
+
+ -  #### a. Individual Film: Cast & Crew Explorer
+  View and compare the historical filmographies of the entire creative team behind a selected film.<br>
   URL: https://public.tableau.com/app/profile/claudia.werner/viz/LovedthatMovieCastCrewFilmography/CastCrew?Tconst_sel_p=tt10370710
 
-  ### b. Individual Contributor: Carrer Timeline
-  Explore an individual contributor's complete filmography and career progression over time.
+ -  #### b. Individual Contributor: Carrer Timeline
+  Explore an individual contributor's complete filmography and career progression over time. <br>
   URL: https://public.tableau.com/app/profile/claudia.werner/viz/LovedthatMovieCastCrewFilmography/CastCrew?Tconst_sel_p=tt10370710
 
-### 2. Most Underrated Movies
-
-  ### Individual User Rating vs IMDb rating
-  ranked by rating discrepancy
-  URL: in progress
+### 3. Most Underrated Movies
+Individual User Rating vs IMDb rating, ranked by rating discrepancy
+URL: in progress
 
 And this will produce a flow chart:
 ```mermaid
