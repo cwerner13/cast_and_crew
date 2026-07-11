@@ -49,95 +49,125 @@ classDef dashed fill:none,stroke:#000000,stroke-width:1px,stroke-dasharray: 5 5;
   }
 }}%%
 
-subgraph "sources: ...\rpi\ENV\interfaces\"
-    subgraph "rpi10008_imdb__editor_lists\import\archive"
-              rpi10008_sg1["www.imdb.com/user/.../lists"]
-    end
-    
-    subgraph "rpi10009_imdb__user_ratings\import\archive"
-              rpi10009_sg1["www.imdb.com/user/.../ratings"]
-    end
+subgraph "01 source ingestion"
 
-    subgraph "IMDb raw sources"
-          
-             A2["name.basics.tsv.gz"]
-             A1["title.basics.tsv.gz"]
-             A3["title.ratings.tsv.gz"]
-             A4["title.principals.tsv.gz"]
-             A5["title.crew.tsv.gz"]
-    end
+    subgraph "☁️📥 https://datasets.imdbws.com/"
+         
+                A2["🎬 name.basics.tsv.gz"]
+                A1["🎬 title.basics.tsv.gz"]
+                A3["🎬 title.ratings.tsv.gz"]
+                A4["🎬 title.principals.tsv.gz"]
+                A5["🎬 title.crew.tsv.gz"]
+         
+    end    
+
+    subgraph "☁️📥 https://www.imdb.com/exports/"
+         
+                A6["📋 www.imdb.com/user/.../lists"]:::dashed
+                A7["⭐ www.imdb.com/user/.../ratings"]:::dashed
+
+         
+    end    
  end
 
   %%% dwh
-  subgraph "dwh ...\rpi\ENV\transformations\"
-  subgraph "dwh_titles__details.ipynb"
-    D1["dwh_titles__details.csv"]
-    D3["dwh_titles__ratings.csv"]
-  end
+  subgraph "02 transformation"
 
-    subgraph "dwh_principals__details.ipynb"
-    D2["dwh_principals__details.csv"]
-  end
+  %%%%
+
+    subgraph "☁️📂 ...\rpi\ENV\interfaces\"
+
+        subgraph "rpi10008_imdb__editor_lists\import\archive"
+                  rpi10008_sg1["FILMFESTIVAL_yyyy.csv"]
+        end
+        
+        subgraph "rpi10009_imdb__user_ratings\import\archive"
+                  rpi10009_sg1["USER_PROFILE_ratings.csv"]
+        end
+
+        subgraph "interface size exceeds current gdrive storage limit"
+            BD1["cln_imdb__title_basics"]:::dashed 
+            BD2["cln_imdb__name_basics"]:::dashed
+            BD3["cln_imdb__title_ratings"]:::dashed
+            BD4["cln_imdb__title_principals"]:::dashed      
+            BD5["cln_imdb__title_crew"]:::dashed          
+        end    
+        
+    end
+  %%%%
+      subgraph "☁️📂 dwh ...\rpi\ENV\transformations\"
+          subgraph "dwh_titles__details.ipynb"
+            D1["dwh_titles__details.csv"]
+            D3["dwh_titles__ratings.csv"]
+          end
+
+          subgraph "dwh_principals__details.ipynb"
+            D2["dwh_principals__details.csv"]
+          end
+
+          subgraph "dwh_xref_titles_principals__filtered.ipynb"
+            D4["dwh_xref_titles_principals__filtered.csv"]
+          end
+
+          subgraph "dwh_titles__user_profile_ratings.ipynb"
+            rpi10009_sg3["ratings.csv"]
+          end
+
+          subgraph "dwh_titles__editor_lists.ipynb"
+            D5["dwh_titles__editor_lists.csv"]
+            D6["dwh_editor_lists__pivoted.csv"]
+          end
+      end
 
 
-  subgraph "dwh_xref_titles_principals__filtered.ipynb"
-    D4["dwh_xref_titles_principals__filtered.csv"]
-  end
-
-
-
-  subgraph "dwh_titles__user_profile_ratings.ipynb"
-    rpi10009_sg3["ratings.csv"]
-  end
-  subgraph "dwh_titles__editor_lists.ipynb"
-    D5["dwh_titles__editor_lists.csv"]
-    D6["dwh_editor_lists__pivoted.csv"]
-  end
-end
- 
   %%% mart
-  subgraph "mrt/xto   ...\rpi\ENV\interfaces\rpi20003_twb__cast_and_crew\export\current"
+      subgraph "☁️📂 mrt/xto   ...\rpi\ENV\interfaces\rpi20003_twb__cast_and_crew\export\current"
 
-    subgraph "mrt_titles__editor_lists.ipynb"
-              D12["mrt_titles__editor_lists.csv"]
-    end
+        subgraph "mrt_titles__editor_lists.ipynb"
+                  D12["mrt_titles__editor_lists.csv"]
+        end
 
-    subgraph "mrt_xref_title_principals__enriched.ipynb"
-              D7["mrt_xref_titles_principals__enriched.csv"]
-    end
+        subgraph "mrt_xref_title_principals__01_enriched.ipynb"
+                  D7["mrt_xref_titles_principals__enriched.csv"]
+        end
 
+        subgraph "mrt_xref_title_principals__02_rating_profiles.ipynb"
+                D8["Xfst"]:::dashed
+                D10["mrt_principals__aggregated.csv"]
+                D9["mrt_titles__per_rating_category.csv"]
+                D11["mrt_principals__per_rating_category.csv"]
+        end
+      end 
 
-    
+   end   
 
-    subgraph "mrt_xref_title_principals__rating_profiles.ipynb"
-             D8["Xfst"]:::dashed
-             D10["mrt_principals__aggregated.csv"]
-             D9["mrt_titles__per_rating_category.csv"]
-            D11["mrt_principals__per_rating_category.csv"]
-    end
-  end 
  
-
-  
+  %% consumption
+  subgraph "03 consumption"
+      subgraph "☁️👥 https://public.tableau.com/" 
+        Festivalguide[" 📈 🎟️ Festivalguide"]
+        Cast_and_Crew_Filmography[" 📈 🎥 Cast & Crew Filmography"]
+        Most_Underrated_Movies["📈 📢 Most Underrated Movies"]       
+      end
+  end
 
   %%% connections
-  A1 --> D1
-  A2 --> D2
-  A3 --> D3
-  A4 --> D4
-  A5 --> D4
+ 
+
 
    
  
-  rpi10008_sg1   --> D5
-  rpi10009_sg1   --> rpi10009_sg3 --> D7
+  
 
 
 
-  D1 --> D7
-  D2 --> D7
-  D3 --> D7
-  D4 --> D7
+  A1 --> BD1 -->  D1 --> D7
+   A2 --> BD2 -->  D2 --> D7
+   A3 --> BD3 -->  D3 --> D7
+   A4 --> BD4 -->  D4 --> D7
+  A5 --> BD5--> D4
+  A6 -->rpi10008_sg1   --> D5
+  A7 --> rpi10009_sg1   --> rpi10009_sg3 --> D7
 
   D7 --> D8
   D5 --> D8
@@ -156,11 +186,8 @@ end
   D11  --> Festivalguide
 
  
-  subgraph "https://public.tableau.com/" 
-     Festivalguide
-     Cast_and_Crew_Filmography
-     Most_Underrated_Movies
-    end
+ 
+
 ```
 
 Loved that movie? Wonder whether cast & crew has teamed up before? 
