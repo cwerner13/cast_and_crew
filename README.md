@@ -49,6 +49,8 @@ classDef dashed fill:none,stroke:#000000,stroke-width:1px,stroke-dasharray: 5 5;
   }
 }}%%
 
+
+
 subgraph "01 source ingestion"
 
     subgraph "☁️📥 https://datasets.imdbws.com/"
@@ -110,7 +112,7 @@ subgraph "01 source ingestion"
           end
 
           subgraph "dwh_titles__user_profile_ratings.ipynb"
-            rpi10009_sg3["ratings.csv"]
+            rpi10009_sg3["dwh_titles__user_profile_ratings.csv"]
           end
 
           subgraph "dwh_titles__editor_lists.ipynb"
@@ -151,6 +153,9 @@ subgraph "01 source ingestion"
       end
   end
 
+  click Festivalguide "https://public.tableau.com/app/profile/claudia.werner/viz/Festivalguide/FestivalBubble" "Click to view on Tableau Public"
+  click Cast_and_Crew_Filmography "https://public.tableau.com/app/profile/claudia.werner/viz/LovedthatMovieCastCrewFilmography/CastCrew?Tconst_sel_p=tt10370710" "Click to view on Tableau Public"
+  
   %%% connections
  
 
