@@ -6,7 +6,7 @@ This project extends a film screening programme with historical IMDb data to pro
 
 ## 🚀 Project Architecture
 
-* **Source**: IMDb historical datasets.
+* **Source**: IMDb datasets.
 * **Transformation**: Jupyter Notebook for data cleansing, filtering, and aggregation.
 * **Interactive Consumption**: Tableau Public dashboard for end-user exploration.
 
@@ -204,15 +204,11 @@ with option to select film's imdb website or  Cast & Crew Filmography<br>
 URL: https://public.tableau.com/app/profile/claudia.werner/viz/Festivalguide/FestivalBubble
 
 ### 2. Cast & Crew Filmography
+- Individual Film: View and compare the historical filmographies of the entire creative team behind a selected film
+- Individual Contributor: xplore an individual contributor's complete filmography and career progression over time
 
- -  #### a. Individual Film: Cast & Crew Explorer
-  View and compare the historical filmographies of the entire creative team behind a selected film.<br>
-  URL: https://public.tableau.com/app/profile/claudia.werner/viz/LovedthatMovieCastCrewFilmography/CastCrew?Tconst_sel_p=tt10370710
-
- -  #### b. Individual Contributor: Carrer Timeline
-  Explore an individual contributor's complete filmography and career progression over time. <br>
-  URL: https://public.tableau.com/app/profile/claudia.werner/viz/LovedthatMovieCastCrewFilmography/CastCrew?Tconst_sel_p=tt1037071000
-
+URL: https://public.tableau.com/app/profile/claudia.werner/viz/LovedthatMovieCastCrewFilmography/CastCrew?Tconst_sel_p=tt10370710
+ 
 ### 3. Most Underrated Movies
 Individual User Rating vs IMDb rating, ranked by rating discrepancy
 URL: in progress
