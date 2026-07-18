@@ -1,37 +1,39 @@
 # Project Overview
 
-## Problem Statement
-Choosing a film is often difficult when the available options are unfamiliar. Whether browsing a local cinema's weekly programme, a streaming watchlist, or a film festival schedule, viewers typically have little information beyond a title, synopsis, trailer, or a single IMDb rating.
+# Screening Programme Contextualizer (cast_and_crew)
 
-These sources provide limited insight into the people behind a film and their previous work, making it harder to judge whether a film is likely to match a viewer's interests.
+This project extends a film screening programme with historical IMDb data to provide additional context for decision-making. Instead of evaluating only the films currently showing, users can explore the comprehensive track record of the directors, writers, actors, producers, composers, cinematographers, editors, and other contributors behind each film.
 
-## Solution
-This project extends a screening programme with historical IMDb data to provide additional context for decision-making. Instead of evaluating only the films currently showing, users can explore the track record of the directors, writers, actors, producers, composers, cinematographers, editors, and other contributors behind each film.
+## 🚀 Project Architecture
 
-Tableau dashboards are linked for interactive views:
+* **Source**: IMDb historical datasets.
+* **Transformation**: Jupyter Notebook for data cleansing, filtering, and aggregation.
+* **Interactive Consumption**: Tableau Public dashboard for end-user exploration.
 
-### 1. Festival Guide / Screening Programme Overview
-- Compare films in the selected programme using IMDb Rating and IMDb Votes. 
-- Compare its contributors based on the average IMDb rating and total IMDb votes of their previous work.
+## 🛠️ Getting Started
 
-with option to select film's imdb website or  Cast & Crew Filmography<br> 
-URL: https://public.tableau.com/app/profile/claudia.werner/viz/Festivalguide/FestivalBubble
+Data is extracted from IMDb, transformed using Python, and loaded into Tableau Public. 
 
-### 2. Cast & Crew Filmography
+All source code and data transformation pipelines can be found in the [cast_and_crew GitHub Repository](https://github.com).
 
- -  #### a. Individual Film: Cast & Crew Explorer
-  View and compare the historical filmographies of the entire creative team behind a selected film.<br>
-  URL: https://public.tableau.com/app/profile/claudia.werner/viz/LovedthatMovieCastCrewFilmography/CastCrew?Tconst_sel_p=tt10370710
+## 📄 Sources, Attribution & Disclaimer
 
- -  #### b. Individual Contributor: Carrer Timeline
-  Explore an individual contributor's complete filmography and career progression over time. <br>
-  URL: https://public.tableau.com/app/profile/claudia.werner/viz/LovedthatMovieCastCrewFilmography/CastCrew?Tconst_sel_p=tt10370710
+### IMDb Data
+Information courtesy of IMDb ([imdb.com](http://imdb.com)). Used with permission for personal and non-commercial utilization under the [IMDb Dataset Terms and Conditions](https://imdb.com). 
+* **Data Retrieval**: Sourced officially via [IMDb Interfaces](https://imdb.com).
+* **Festival Curation**: Derived from data managed by [IMDb-Editors](https://imdb.com).
+* *Disclaimer: This project is strictly non-commercial and intended for educational and analytical visualization purposes only.*
 
-### 3. Most Underrated Movies
-Individual User Rating vs IMDb rating, ranked by rating discrepancy
-URL: in progress
+### Asset & Icon Attributions
+* **Golmin Design**: Icons used from the [Free Daily Icon Set](https://iconfinder.com).
+* **icons.design**: Assets utilized from the [Social 23 Set](https://iconfinder.com).
+* **Ikonate**: Created by Mikolaj Dobrucki ([mikolajdobrucki.com](http://mikolajdobrucki.com)). Released under the [MIT License](https://opensource.org) (Copyright © Mikolaj Dobrucki).
+* **Freepik**: Cinema icons sourced via [Flaticon](https://flaticon.com).
 
-And this will produce a flow chart:
+
+
+
+ 
 ```mermaid
  flowchart LR
 
@@ -190,12 +192,27 @@ subgraph "01 source ingestion"
   D9  --> Festivalguide
   D11  --> Festivalguide
 
- 
- 
-
 ```
 
-Loved that movie? Wonder whether cast & crew has teamed up before? 
-See their entire filmgraphy in one glance, based on data extracted from IMDb (Python) and loaded into a dashboard (Tableau Public).
 
-https://public.tableau.com/app/profile/claudia.werner/viz/LovedthatMovieCastCrewFilmography/CastCrew
+
+### 1. Festival Guide / Screening Programme Overview
+- Compare films in the selected programme using IMDb Rating and IMDb Votes. 
+- Compare its contributors based on the average IMDb rating and total IMDb votes of their previous work.
+
+with option to select film's imdb website or  Cast & Crew Filmography<br> 
+URL: https://public.tableau.com/app/profile/claudia.werner/viz/Festivalguide/FestivalBubble
+
+### 2. Cast & Crew Filmography
+
+ -  #### a. Individual Film: Cast & Crew Explorer
+  View and compare the historical filmographies of the entire creative team behind a selected film.<br>
+  URL: https://public.tableau.com/app/profile/claudia.werner/viz/LovedthatMovieCastCrewFilmography/CastCrew?Tconst_sel_p=tt10370710
+
+ -  #### b. Individual Contributor: Carrer Timeline
+  Explore an individual contributor's complete filmography and career progression over time. <br>
+  URL: https://public.tableau.com/app/profile/claudia.werner/viz/LovedthatMovieCastCrewFilmography/CastCrew?Tconst_sel_p=tt1037071000
+
+### 3. Most Underrated Movies
+Individual User Rating vs IMDb rating, ranked by rating discrepancy
+URL: in progress
