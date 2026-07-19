@@ -1,34 +1,18 @@
-# Project Overview
-
 # Screening Programme Contextualizer (cast_and_crew)
 
 This project extends a film screening programme with historical IMDb data to provide additional context for decision-making. Instead of evaluating only the films currently showing, users can explore the comprehensive track record of the directors, writers, actors, producers, composers, cinematographers, editors, and other contributors behind each film.
 
-## 🚀 Project Architecture
+## Project Architecture
 
 * **Source**: IMDb datasets.
 * **Transformation**: Jupyter Notebook for data cleansing, filtering, and aggregation.
 * **Interactive Consumption**: Tableau Public dashboard for end-user exploration.
 
-## 🛠️ Getting Started
+## Getting Started
 
 Data is extracted from IMDb, transformed using Python, and loaded into Tableau Public. 
+Source code for data transformation pipelines can be found in this [cast_and_crew GitHub Repository](https://github.com/cwerner13/cast_and_crew).
 
-All source code and data transformation pipelines can be found in the [cast_and_crew GitHub Repository](https://github.com).
-
-## 📄 Sources, Attribution & Disclaimer
-
-### IMDb Data
-Information courtesy of IMDb ([imdb.com](http://imdb.com)). Used with permission for personal and non-commercial utilization under the [IMDb Dataset Terms and Conditions](https://imdb.com). 
-* **Data Retrieval**: Sourced officially via [IMDb Interfaces](https://imdb.com).
-* **Festival Curation**: Derived from data managed by [IMDb-Editors](https://imdb.com).
-* *Disclaimer: This project is strictly non-commercial and intended for educational and analytical visualization purposes only.*
-
-### Asset & Icon Attributions
-* **Golmin Design**: Icons used from the [Free Daily Icon Set](https://iconfinder.com).
-* **icons.design**: Assets utilized from the [Social 23 Set](https://iconfinder.com).
-* **Ikonate**: Created by Mikolaj Dobrucki ([mikolajdobrucki.com](http://mikolajdobrucki.com)). Released under the [MIT License](https://opensource.org) (Copyright © Mikolaj Dobrucki).
-* **Freepik**: Cinema icons sourced via [Flaticon](https://flaticon.com).
 
 
 
@@ -160,14 +144,6 @@ subgraph "01 source ingestion"
   
   %%% connections
  
-
-
-   
- 
-  
-
-
-
   A1 --> BD1 -->  D1 --> D7
    A2 --> BD2 -->  D2 --> D7
    A3 --> BD3 -->  D3 --> D7
@@ -194,7 +170,7 @@ subgraph "01 source ingestion"
 
 ```
 
-
+## Tableau Dashboards
 
 ### 1. Festival Guide / Screening Programme Overview
 - Compare films in the selected programme using IMDb Rating and IMDb Votes. 
@@ -204,11 +180,30 @@ with option to select film's imdb website or  Cast & Crew Filmography<br>
 URL: https://public.tableau.com/app/profile/claudia.werner/viz/Festivalguide/FestivalBubble
 
 ### 2. Cast & Crew Filmography
-- Individual Film: View and compare the historical filmographies of the entire creative team behind a selected film
-- Individual Contributor: xplore an individual contributor's complete filmography and career progression over time
+- per Film: View and compare the historical filmographies of the entire creative team behind a selected film
+- per Contributor: Explore an individual contributor's complete filmography and career progression over time
 
 URL: https://public.tableau.com/app/profile/claudia.werner/viz/LovedthatMovieCastCrewFilmography/CastCrew?Tconst_sel_p=tt10370710
  
 ### 3. Most Underrated Movies
-Individual User Rating vs IMDb rating, ranked by rating discrepancy
+- Individual User Rating vs IMDb rating, ranked by rating discrepancy
+
 URL: in progress
+
+
+
+## Sources, Attribution & Disclaimer
+
+### IMDb Data
+Information courtesy of IMDb ([imdb.com](http://imdb.com)). Used with permission for personal and non-commercial utilization under the [IMDb Dataset Terms and Conditions](https://developer.imdb.com/non-commercial-datasets/). 
+* **Data Retrieval**: Sourced officially via [IMDb Data Sets](https://datasets.imdbws.com/) 
+* **Festival Curation**: Derived from data managed by list editors [IMDb Lists](https://www.imdb.com/lists/tt17041964/).
+* *Disclaimer: This project is strictly non-commercial and educational purposes only.*
+
+
+### Asset & Icon Attributions
+* **Golmin Design**: Icons used from the [Free Daily Icon Set](https://www.iconfinder.com/iconsets/free-daily-icon-set).
+* **icons.design**: Assets utilized from the [Social 23 Set](https://www.iconfinder.com/iconsets/social-23).
+* **Ikonate**: Created by Mikolaj Dobrucki ([mikolajdobrucki.com](http://mikolajdobrucki.com)). Released under the [MIT License](https://opensource.org) (Copyright © Mikolaj Dobrucki).
+* **Freepik**: Cinema icons sourced via [Flaticon](https://flaticon.com).
+ 
